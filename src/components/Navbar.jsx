@@ -22,6 +22,8 @@ const Navbar = () => {
         <ul className="hidden md:flex space-x-6 text-lg">
           <li className="hover:text-blue-400 transition"><a href="#about">About</a></li>
           <li className="hover:text-blue-400 transition"><a href="#projects">Projects</a></li>
+          <li className="hover:text-blue-400 transition"><a href="#education">Education</a></li>
+          <li className="hover:text-blue-400 transition"><a href="#experience">Experience</a></li>
           <li className="hover:text-blue-400 transition"><a href="#contact">Contact</a></li>
           <li className="hover:text-blue-400 transition"><a href="#skills">Skills</a></li>
         </ul>
@@ -47,6 +49,7 @@ const Navbar = () => {
             <li className="py-2 hover:text-blue-400 transition"><a href="#experience" onClick={() => setIsOpen(false)}>Experience</a></li>
             <li className="py-2 hover:text-blue-400 transition"><a href="#contact" onClick={() => setIsOpen(false)}>Contact</a></li>
             <li className="py-2 hover:text-blue-400 transition"><a href="#skills" onClick={() => setIsOpen(false)}>Skills</a></li>
+
           </motion.ul>
         )}
       </AnimatePresence>
