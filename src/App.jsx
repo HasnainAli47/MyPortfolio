@@ -6,6 +6,7 @@ import Projects from "./components/projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import Education from "./components/Education";
+import Experience from "./components/Experience";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Navbar />
       <About />
+      <Experience />
       <Skills />
       <Projects />
       <Education />
