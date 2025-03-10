@@ -15,7 +15,7 @@ const Navbar = () => {
           transition={{ duration: 0.8 }} 
           className="text-2xl font-bold"
         >
-          MyPortfolio
+          Hasnain Ali
         </motion.h1>
 
         {/* Desktop Menu */}
