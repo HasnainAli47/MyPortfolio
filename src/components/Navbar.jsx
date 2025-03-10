@@ -43,6 +43,8 @@ const Navbar = () => {
           >
             <li className="py-2 hover:text-blue-400 transition"><a href="#about" onClick={() => setIsOpen(false)}>About</a></li>
             <li className="py-2 hover:text-blue-400 transition"><a href="#projects" onClick={() => setIsOpen(false)}>Projects</a></li>
+            <li className="py-2 hover:text-blue-400 transition"><a href="#education" onClick={() => setIsOpen(false)}>Education</a></li>
+            <li className="py-2 hover:text-blue-400 transition"><a href="#experience" onClick={() => setIsOpen(false)}>Experience</a></li>
             <li className="py-2 hover:text-blue-400 transition"><a href="#contact" onClick={() => setIsOpen(false)}>Contact</a></li>
             <li className="py-2 hover:text-blue-400 transition"><a href="#skills" onClick={() => setIsOpen(false)}>Skills</a></li>
           </motion.ul>
