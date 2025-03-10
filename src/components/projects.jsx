@@ -50,7 +50,7 @@ const Projects = () => {
   const scrollRef = useRef(null);
 
   return (
-    <section id="projects" className="w-full min-h-screen flex flex-col items-center bg-black text-white px-10 mt-10">
+    <section id="projects" className="w-full min-h-screen flex flex-col items-center bg-black text-white px-10 py-10">
       <motion.h2
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
