@@ -6,7 +6,7 @@ const About = () => {
   return (
     <section 
       id="about" 
-      className="w-full min-h-screen flex items-center justify-center bg-black text-white px-6 md:px-10 py-16 md:py-24 relative overflow-hidden"
+      className="w-full min-h-screen flex items-center justify-center bg-black text-white px-6 md:px-7 py-13 md:py-20 relative overflow-hidden"
     >
       {/* 3D Sphere - Now Above the Text */}
       <div className="absolute inset-0 flex items-center justify-center z-10 opacity-40 pointer-events-none">
