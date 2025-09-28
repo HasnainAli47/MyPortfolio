@@ -14,6 +14,8 @@ import CommandPalette from "./components/CommandPalette";
 import Admin from "./pages/Admin";
 import BlogPage from "./pages/BlogPage";
 import BlogPost from "./pages/BlogPost";
+import React from "react";
+
 
 function Home() {
   return (
