@@ -4,7 +4,7 @@ const projects = [
   {
     key: "smart-advocate",
     title: "Smart Advocate",
-    image: "/images/projects/smart-advocate.jpg",
+    image: "/projects/SmartAdvocate.png",
     description:
       "AI legal assistant leveraging LLMs for document drafting, retrieval, and guided workflows.",
     tech: ["LangGraph", "RAG", "LLM", "LoRA", "PyTorch"],
@@ -13,7 +13,7 @@ const projects = [
   {
     key: "convopilot",
     title: "ConvoPilot",
-    image: "/images/projects/convopilot.jpg",
+    image: "/images/projects/placeholder.svg",
     description:
       "Multi-agent conversational system coordinating LLM tools for enterprise workflows.",
     tech: ["Agentic AI", "LangGraph", "OpenAI SDK", "Neo4j"],
@@ -22,7 +22,7 @@ const projects = [
   {
     key: "vaultoniq",
     title: "Vaultoniq",
-    image: "/images/projects/vaultoniq.jpg",
+    image: "/projects/Vaultoniq.png",
     description:
       "A US-based automobile automation platform for workshop employees to track attendance, work history, and optimize operations.",
     tech: ["Django", "PostgreSQL", "React Native", "OpenAI API", "Ruby on Rails"],
@@ -31,7 +31,7 @@ const projects = [
   {
     key: "instant-legal",
     title: "Instant Legal",
-    image: "/images/projects/instant-legal.jpg",
+    image: "/projects/Instant Legal.png",
     description:
       "An AI-powered platform for generating legal documents like rental agreements, tailored to UK laws using OpenAI.",
     tech: ["Django", "React", "OpenAI API", "PostgreSQL"],
@@ -43,7 +43,7 @@ const projects = [
   {
     key: "satcorn",
     title: "SatCorn – ML-Powered Crop Irrigation",
-    image: "/images/projects/satcorn.jpg",
+    image: "/projects/SatCorn.jpeg",
     description:
       "AI-based crop irrigation system using satellite imagery and machine learning to detect soil irrigation levels.",
     tech: ["Django", "React", "MongoDB", "Machine Learning", "Google Maps API"],
@@ -55,7 +55,7 @@ const projects = [
   {
     key: "resume-parser",
     title: "Resume Parser – AI-Powered Resume Analysis",
-    image: "/images/projects/resume-parser.jpg",
+    image: "/projects/ResumeParser.png",
     description:
       "An AI-driven system that parses resumes using OCR and Llama-3 to extract candidate details for structured storage and filtering.",
     tech: ["Django", "React", "SQL", "OCR", "Llama-3-70B"],
@@ -68,7 +68,7 @@ const projects = [
   {
     key: "2ndplace",
     title: "2ndPlace – Hostel Finder",
-    image: "/images/projects/2ndplace.jpg",
+    image: "/projects/2ndPlace.png",
     description:
       "A hostel discovery platform integrating Google Maps API for location-based searches and Stripe for online payments.",
     tech: ["React", "Django", "PostgreSQL", "MongoDB", "Google Maps API"],
