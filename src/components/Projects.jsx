@@ -13,7 +13,7 @@ const projects = [
   {
     key: "convopilot",
     title: "ConvoPilot",
-    image: "/projects/ConvoPilot.jpeg",
+    image: "/images/projects/placeholder.svg",
     description:
       "Multi-agent conversational system coordinating LLM tools for enterprise workflows.",
     tech: ["Agentic AI", "LangGraph", "OpenAI SDK", "Neo4j"],

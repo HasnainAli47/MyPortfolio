@@ -33,7 +33,7 @@ function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-black/70 border-b border-white/10">
+    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0b0b0b] border-b border-white/10 shadow-md">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/#home" className="font-semibold tracking-tight text-white text-lg sm:text-xl">
           Hasnain Ali
@@ -77,38 +77,41 @@ function Header() {
       </div>
 
       {open && (
-        <div className="md:hidden fixed inset-0 bg-[#111111]">
-          <button
-            aria-label="Close Menu"
-            className="absolute top-4 right-4 text-white hover:text-accent"
-            onClick={() => setOpen(false)}
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-          <div className="flex flex-col items-center justify-center h-full gap-8">
-            {navItems.map((item) => (
-              item.href.startsWith('/') ? (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={`text-white text-2xl hover:text-accent active:text-accent transition-colors ${active === item.href ? 'text-accent' : ''}`}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              ) : (
-                <Link
-                  key={item.href}
-                  to={`/${item.href}`}
-                  className={`text-white text-2xl hover:text-accent active:text-accent transition-colors ${active === item.href ? 'text-accent underline underline-offset-8' : ''}`}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              )
-            ))}
+        <div className="md:hidden fixed inset-0 z-50">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm" onClick={() => setOpen(false)} />
+          <div className="absolute right-0 top-0 h-full w-[85%] max-w-xs bg-zinc-900/95 border-l border-white/10 shadow-2xl p-6 flex flex-col">
+            <div className="flex items-center justify-between mb-6">
+              <Link to="/#home" className="font-semibold tracking-tight text-white">Hasnain Ali</Link>
+              <button
+                aria-label="Close Menu"
+                className="text-white hover:text-accent transition-colors"
+                onClick={() => setOpen(false)}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            <nav className="flex flex-col gap-2">
+              {navItems.map((item) => {
+                const isRoute = item.href.startsWith('/');
+                const to = isRoute ? item.href : `/${item.href}`;
+                const isActive = active === item.href;
+                return (
+                  <Link
+                    key={item.href}
+                    to={to}
+                    className={`block w-full rounded-lg px-4 py-3 text-white/90 hover:bg-white/10 hover:text-white transition-colors ${isActive ? 'bg-white/10 text-white' : ''}`}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </nav>
+            <div className="mt-auto pt-6 text-xs text-white/50">
+              Press Esc or tap outside to close
+            </div>
           </div>
         </div>
       )}
