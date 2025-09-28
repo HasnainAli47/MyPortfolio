@@ -7,11 +7,19 @@ export default function BlogPage() {
   useEffect(() => {
     const run = async () => {
       try {
-        const res = await fetch('/api/blog');
-        const data = await res.json();
-        setPosts(Array.isArray(data) ? data : []);
+        let res = await fetch('/api/blog');
+        if (!res.ok) throw new Error('api failed');
+        let data = await res.json();
+        if (!Array.isArray(data)) throw new Error('bad api');
+        setPosts(data);
       } catch {
-        setPosts([]);
+        try {
+          const res2 = await fetch('/posts.json');
+          const data2 = await res2.json();
+          setPosts(Array.isArray(data2) ? data2 : []);
+        } catch {
+          setPosts([]);
+        }
       } finally {
         setLoading(false);
       }

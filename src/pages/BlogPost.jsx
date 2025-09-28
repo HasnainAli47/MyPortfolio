@@ -9,12 +9,22 @@ export default function BlogPost() {
   useEffect(() => {
     const run = async () => {
       try {
-        const res = await fetch('/api/blog');
-        const data = await res.json();
-        const found = Array.isArray(data) ? data.find((p) => p.slug === slug) : null;
-        setPost(found || null);
+        let res = await fetch('/api/blog');
+        if (!res.ok) throw new Error('api failed');
+        let data = await res.json();
+        if (!Array.isArray(data)) throw new Error('bad api');
+        const found = data.find((p) => p.slug === slug);
+        if (found) { setPost(found); return; }
+        throw new Error('not found via api');
       } catch {
-        setPost(null);
+        try {
+          const res2 = await fetch('/posts.json');
+          const data2 = await res2.json();
+          const alt = Array.isArray(data2) ? data2.find((p) => p.slug === slug) : null;
+          setPost(alt || null);
+        } catch {
+          setPost(null);
+        }
       } finally {
         setLoading(false);
       }
