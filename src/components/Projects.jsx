@@ -128,14 +128,16 @@ export default function Projects() {
           variants={container}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1, margin: '0px 0px -100px 0px' }}
           className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
         >
-          {projects.map((p) => (
+          {projects.map((p, idx) => (
             <motion.div
               key={p.key}
               variants={item}
-              className="rounded-xl p-[1px] bg-gradient-to-br from-[#00A7A7]/30 to-transparent transition-transform hover:scale-[1.02] hover:shadow-[0_0_18px_rgba(0,167,167,0.35)]"
+              whileHover={{ scale: 1.02 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+              className="rounded-xl p-[1px] bg-gradient-to-br from-[#00A7A7]/30 to-transparent hover:shadow-[0_0_18px_rgba(0,167,167,0.35)]"
             >
               <div className="rounded-[11px] h-full border border-white/10 bg-black/30 overflow-hidden flex flex-col">
                 <div className="aspect-video bg-[#0b0b0b]">

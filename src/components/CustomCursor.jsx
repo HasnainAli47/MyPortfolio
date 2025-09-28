@@ -5,11 +5,22 @@ export default function CustomCursor() {
   const ringRef = useRef(null);
 
   useEffect(() => {
+    // Disable custom cursor on touch / coarse pointer devices and small screens
+    if (typeof window !== 'undefined') {
+      const isCoarse = window.matchMedia('(pointer: coarse)').matches;
+      const isSmall = window.matchMedia('(max-width: 768px)').matches;
+      if (isCoarse || isSmall) {
+        if (dotRef.current) dotRef.current.style.display = 'none';
+        if (ringRef.current) ringRef.current.style.display = 'none';
+        return;
+      }
+    }
     const dot = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;
 
-    let mouseX = 0, mouseY = 0;
+    // Initialize off-screen to avoid top-left flash
+    let mouseX = -100, mouseY = -100;
     let ringX = 0, ringY = 0;
     let hovered = false;
 
