@@ -13,6 +13,24 @@ const navItems = [
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('#home');
+
+  // Active link highlight using IntersectionObserver
+  if (typeof window !== 'undefined') {
+    const ids = ['#home', '#about', '#skills', '#experience', '#projects', '#contact'];
+    const sections = ids
+      .map((id) => document.querySelector(id))
+      .filter(Boolean);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActive('#' + entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] }
+    );
+    sections.forEach((el) => observer.observe(el));
+  }
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-black/70 border-b border-white/10">
@@ -27,7 +45,7 @@ function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className="text-gray-300 hover:text-accent transition-colors"
+                className={`text-gray-300 hover:text-accent transition-colors ${active === item.href ? 'text-accent' : ''}`}
               >
                 {item.label}
               </Link>
@@ -35,7 +53,7 @@ function Header() {
               <a
                 key={item.href}
                 href={item.href}
-                className="text-gray-300 hover:text-accent transition-colors"
+                className={`text-gray-300 hover:text-accent transition-colors ${active === item.href ? 'text-accent underline underline-offset-8' : ''}`}
               >
                 {item.label}
               </a>
@@ -75,7 +93,7 @@ function Header() {
                 <Link
                   key={item.href}
                   to={item.href}
-                  className="text-white text-2xl hover:text-accent active:text-accent transition-colors"
+                  className={`text-white text-2xl hover:text-accent active:text-accent transition-colors ${active === item.href ? 'text-accent' : ''}`}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -84,7 +102,7 @@ function Header() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="text-white text-2xl hover:text-accent active:text-accent transition-colors"
+                  className={`text-white text-2xl hover:text-accent active:text-accent transition-colors ${active === item.href ? 'text-accent underline underline-offset-8' : ''}`}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}

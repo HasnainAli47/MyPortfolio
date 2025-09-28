@@ -87,10 +87,21 @@ export default function Experience() {
                     viewport={{ once: true, amount: 0.3 }}
                     className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch`}
                   >
-                    <div className="order-1">
-                      <ExperienceCard role={role} />
-                    </div>
-                    <div className={`hidden md:block ${isLeft ? "order-2" : "order-1"}`} />
+                    {isLeft ? (
+                      <>
+                        <div>
+                          <ExperienceCard role={role} />
+                        </div>
+                        <div className="hidden md:block" />
+                      </>
+                    ) : (
+                      <>
+                        <div className="hidden md:block" />
+                        <div>
+                          <ExperienceCard role={role} />
+                        </div>
+                      </>
+                    )}
                   </motion.div>
                 </div>
               );
