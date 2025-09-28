@@ -35,9 +35,9 @@ function Header() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-black/40 bg-black/70 border-b border-white/10">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <a href="#home" className="font-semibold tracking-tight text-white text-lg sm:text-xl">
+        <Link to="/#home" className="font-semibold tracking-tight text-white text-lg sm:text-xl">
           Hasnain Ali
-        </a>
+        </Link>
 
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {navItems.map((item) => (
@@ -50,13 +50,13 @@ function Header() {
                 {item.label}
               </Link>
             ) : (
-              <a
+              <Link
                 key={item.href}
-                href={item.href}
+                to={`/${item.href}`}
                 className={`text-gray-300 hover:text-accent transition-colors ${active === item.href ? 'text-accent underline underline-offset-8' : ''}`}
               >
                 {item.label}
-              </a>
+              </Link>
             )
           ))}
         </nav>
@@ -99,14 +99,14 @@ function Header() {
                   {item.label}
                 </Link>
               ) : (
-                <a
+                <Link
                   key={item.href}
-                  href={item.href}
+                  to={`/${item.href}`}
                   className={`text-white text-2xl hover:text-accent active:text-accent transition-colors ${active === item.href ? 'text-accent underline underline-offset-8' : ''}`}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               )
             ))}
           </div>
