@@ -1,0 +1,26 @@
+[
+    {
+      "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "slug": "demystifying-rag-building-your-first-retrieval-augmented-generation-system",
+      "title": "Demystifying RAG: Building Your First Retrieval-Augmented Generation System",
+      "excerpt": "A practical guide to understanding and implementing RAG systems. We'll explore how to combine the power of LLMs with external knowledge bases to create smarter, more accurate AI applications.",
+      "content": "## Introduction to RAG\n\nRetrieval-Augmented Generation (RAG) is a revolutionary architecture that enhances the capabilities of Large Language Models (LLMs). While models like GPT-4 are incredibly powerful, they are limited by the data they were trained on. RAG solves this by connecting the LLM to an external, up-to-date knowledge base.\n\n### How It Works\n\nThe process is elegantly simple:\n\n1.  **Retrieval:** When a user asks a question, the system first retrieves relevant documents from a knowledge source (like a Vector DB).\n2.  **Augmentation:** The retrieved information is then added to the user's original prompt as context.\n3.  **Generation:** This augmented prompt is fed to the LLM, which then generates an answer based on both its internal knowledge and the provided context.\n\nThis ensures that the answers are not only fluent but also factual and grounded in specific data.\n\n```python\n# Example of a simplified RAG pipeline\n\ndef answer_question(query):\n  # 1. Retrieve relevant documents\n  retrieved_docs = vector_db.search(query)\n  \n  # 2. Augment the prompt\n  augmented_prompt = f\"\"\"Context: {retrieved_docs}\n\nQuestion: {query}\n\nAnswer:\"\"\"\n  \n  # 3. Generate the answer\n  response = llm.generate(augmented_prompt)\n  return response\n```",
+      "createdAt": "2025-09-26T10:00:00Z"
+    },
+    {
+      "id": "f6e5d4c3-b2a1-0987-6543-210987fedcba",
+      "slug": "beyond-simple-chains-architecting-complex-ai-agents-with-langgraph",
+      "title": "Beyond Simple Chains: Architecting Complex AI Agents with LangGraph",
+      "excerpt": "LangChain is great, but for complex, cyclical workflows, LangGraph is a game-changer. Learn how to build stateful, multi-agent systems that can reason and solve complex problems.",
+      "content": "## The Limitation of Chains\n\nLangChain's `LCEL` (LangChain Expression Language) is fantastic for creating linear sequences of operations. However, real-world problems often require more complex logic, including loops, conditional branches, and state management. This is where agentic behavior comes in.\n\n### Enter LangGraph\n\nLangGraph, built by the LangChain team, extends the core ideas of LCEL to create cyclical graph structures. Instead of a one-way data flow, you define nodes (steps) and edges (transitions), allowing your AI to:\n\n*   **Maintain State:** Each step can modify a shared 'state' object.\n*   **Make Decisions:** Edges can be conditional, routing the flow based on the current state.\n*   **Create Loops:** An agent can loop back to a previous step to refine its work or gather more information.\n\nThis paradigm shift allows us to build sophisticated, autonomous agents that can tackle multi-step tasks without being confined to a linear path. It's the key to building truly intelligent systems.",
+      "createdAt": "2025-09-19T11:30:00Z"
+    },
+    {
+      "id": "1a2b3c4d-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+      "slug": "the-art-of-fine-tuning-when-to-use-lora-vs-full-fine-tuning",
+      "title": "The Art of Fine-Tuning: When to Use LoRA vs. Full Fine-Tuning",
+      "excerpt": "Fine-tuning Large Language Models is a powerful technique, but choosing the right method is key. This post breaks down the trade-offs between full fine-tuning and parameter-efficient methods like LoRA.",
+      "content": "## The Fine-Tuning Dilemma\n\nTo make a pre-trained LLM an expert in a specific domain, you need to fine-tune it on your own data. The traditional approach is **full fine-tuning**, where you update all of the model's billions of parameters. While effective, this is incredibly resource-intensive and expensive.\n\n### The LoRA Revolution\n\nParameter-Efficient Fine-Tuning (PEFT) methods offer a solution. The most popular among them is **LoRA (Low-Rank Adaptation)**.\n\nInstead of updating the entire model, LoRA freezes the original weights and injects small, trainable 'adapter' matrices into the model's layers. This means you are only training a tiny fraction of the parameters (often <1%).\n\n### Which one to choose?\n\n*   **Use Full Fine-Tuning if:** You have a massive dataset, significant computational resources, and need to fundamentally alter the model's core behavior.\n*   **Use LoRA if:** You have limited resources (e.g., a single GPU), a smaller dataset, and want to teach the model a new skill or style without it forgetting its original knowledge. For most commercial applications, LoRA is the clear winner.",
+      "createdAt": "2025-09-12T09:00:00Z"
+    }
+  ]

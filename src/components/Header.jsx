@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const navItems = [
   { href: "#home", label: "Home" },
@@ -6,7 +7,7 @@ const navItems = [
   { href: "#skills", label: "Skills" },
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
-  { href: "#blog", label: "Blog" },
+  { href: "/blog", label: "Blog" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -22,13 +23,23 @@ function Header() {
 
         <nav className="hidden md:flex items-center gap-6 text-sm">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-gray-300 hover:text-accent transition-colors"
-            >
-              {item.label}
-            </a>
+            item.href.startsWith('/') ? (
+              <Link
+                key={item.href}
+                to={item.href}
+                className="text-gray-300 hover:text-accent transition-colors"
+              >
+                {item.label}
+              </Link>
+            ) : (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-gray-300 hover:text-accent transition-colors"
+              >
+                {item.label}
+              </a>
+            )
           ))}
         </nav>
 
@@ -49,16 +60,36 @@ function Header() {
 
       {open && (
         <div className="md:hidden fixed inset-0 bg-[#111111]">
+          <button
+            aria-label="Close Menu"
+            className="absolute top-4 right-4 text-white hover:text-accent"
+            onClick={() => setOpen(false)}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-7 h-7">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
           <div className="flex flex-col items-center justify-center h-full gap-8">
             {navItems.map((item) => (
-              <a
-                key={item.href}
-                href={item.href}
-                className="text-white text-2xl hover:text-accent active:text-accent transition-colors"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </a>
+              item.href.startsWith('/') ? (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className="text-white text-2xl hover:text-accent active:text-accent transition-colors"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="text-white text-2xl hover:text-accent active:text-accent transition-colors"
+                  onClick={() => setOpen(false)}
+                >
+                  {item.label}
+                </a>
+              )
             ))}
           </div>
         </div>

@@ -71,14 +71,14 @@ export default function Experience() {
         </h2>
 
         <div className="relative mt-12">
-          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-[#00A7A7]/40" />
+          <div className="absolute left-1/2 -translate-x-1/2 top-0 bottom-0 w-[2px] bg-[#00A7A7]/40 hidden md:block" />
 
           <div className="space-y-12">
             {roles.map((role, idx) => {
               const isLeft = role.side === "left";
               return (
                 <div key={`${role.company}-${idx}`} className="relative">
-                  <span className="absolute left-1/2 -translate-x-1/2 mt-2 block h-3 w-3 rounded-full bg-[#00A7A7] shadow-[0_0_12px_rgba(0,167,167,0.6)]" />
+                  <span className="hidden md:block absolute left-1/2 -translate-x-1/2 mt-2 h-3 w-3 rounded-full bg-[#00A7A7] shadow-[0_0_12px_rgba(0,167,167,0.6)]" />
 
                   <motion.div
                     variants={cardVariants}
@@ -87,16 +87,9 @@ export default function Experience() {
                     viewport={{ once: true, amount: 0.3 }}
                     className={`grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-stretch`}
                   >
-                    {isLeft ? (
-                      <div className="order-1">
-                        <ExperienceCard role={role} />
-                      </div>
-                    ) : (
-                      <div className="order-2 md:order-2">
-                        <ExperienceCard role={role} />
-                      </div>
-                    )}
-
+                    <div className="order-1">
+                      <ExperienceCard role={role} />
+                    </div>
                     <div className={`hidden md:block ${isLeft ? "order-2" : "order-1"}`} />
                   </motion.div>
                 </div>
