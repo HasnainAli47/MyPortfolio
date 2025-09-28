@@ -31,7 +31,7 @@ export default function About() {
               About Me
             </h2>
             <p className="mt-5 text-base sm:text-lg leading-relaxed text-slate-300">
-              A results-driven AI/ML Engineer with over 3 years of experience specializing in building and deploying sophisticated AI agents, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. Expertise in fine-tuning LLMs (LoRA, QLoRA) in multi-GPU environments for high-profile clients. Proven ability to architect complex, agentic workflows with LangGraph and deliver scalable, production-ready AI solutions that solve critical business problems.
+              A results-driven AI/ML Engineer with over 4 years of experience specializing in building and deploying sophisticated AI agents, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. Expertise in fine-tuning LLMs (LoRA, QLoRA) in multi-GPU environments for high-profile clients. Proven ability to architect complex, agentic workflows with LangGraph and deliver scalable, production-ready AI solutions that solve critical business problems.
             </p>
             <p className="mt-4 text-base sm:text-lg text-slate-300">
               I am passionate about leveraging cutting-edge AI to build intelligent, scalable, and user-centric products that deliver real-world impact.

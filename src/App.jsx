@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -52,6 +52,7 @@ function App() {
         <CustomCursor />
         <Header />
         <SocialSidebar />
+        <ScrollToHash />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/admin" element={<Admin />} />
@@ -63,6 +64,21 @@ function App() {
       </div>
     </BrowserRouter>
   );
+}
+
+function ScrollToHash() {
+  const location = useLocation();
+  React.useEffect(() => {
+    if (location.hash) {
+      const el = document.querySelector(location.hash);
+      if (el) {
+        setTimeout(() => el.scrollIntoView({ behavior: 'smooth' }), 0);
+      }
+    } else {
+      window.scrollTo({ top: 0 });
+    }
+  }, [location.pathname, location.hash]);
+  return null;
 }
 
 export default App;

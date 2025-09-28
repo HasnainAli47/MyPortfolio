@@ -71,7 +71,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-4 text-base sm:text-lg md:text-xl text-slate-300"
         >
-          A results-driven AI/ML Engineer with over 3 years of experience specializing in building and deploying sophisticated AI agents, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems.
+          A results-driven AI/ML Engineer with over 4 years of experience specializing in building and deploying sophisticated AI agents, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems.
         </motion.p>
 
         <motion.div
