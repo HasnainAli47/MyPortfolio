@@ -14,7 +14,7 @@ export default function About() {
           >
             <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-64 md:h-64 rounded-2xl overflow-hidden border border-transparent bg-gradient-to-br from-[#00A7A7]/30 to-transparent p-[2px] shadow-[0_0_15px_rgba(0,167,167,0.5)]">
               <img
-                src="/images/profile-placeholder.jpg"
+                src="/hasnainali.webp"
                 alt="Hasnain Ali headshot"
                 className="w-full h-full object-cover rounded-2xl"
               />
