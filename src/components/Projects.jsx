@@ -8,7 +8,7 @@ const projects = [
     description:
       "AI legal assistant leveraging LLMs for document drafting, retrieval, and guided workflows.",
     tech: ["LangGraph", "RAG", "LLM", "LoRA", "PyTorch"],
-    links: { code: "#" },
+    links: { live: "https://www.smartadvocate.com/" },
   },
   {
     key: "convopilot",
@@ -49,7 +49,7 @@ const projects = [
     tech: ["Django", "React", "MongoDB", "Machine Learning", "Google Maps API"],
     links: {
       github: "https://github.com/HasnainAli47/SatCorn_FYP",
-      live: "https://www.linkedin.com/in/hasnainali3/details/projects/",
+      inAction: "https://www.linkedin.com/in/hasnainali3/details/projects/",
     },
   },
   {
