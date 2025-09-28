@@ -1,8 +1,25 @@
 @import "tailwindcss";
 
-body {
-  background-color: black;
-  color: white;
-  font-family: "Poppins", sans-serif;
+body {  
+  background-color: #111111;
+  color: #EAEAEA;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
   overflow-x: hidden;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --bg: #111111;
+  --text: #EAEAEA;
+  --accent: #00A7A7;
+}
+
+.text-accent { color: var(--accent); }
+.bg-accent { background-color: var(--accent); }
+.border-accent { border-color: var(--accent); }
+.hover\:text-accent:hover { color: var(--accent); }
+.hover\:bg-accent\/10:hover { background-color: color-mix(in srgb, var(--accent) 10%, transparent); }
+.hover\:bg-accent\/90:hover { background-color: color-mix(in srgb, var(--accent) 90%, black); }

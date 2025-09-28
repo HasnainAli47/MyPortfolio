@@ -1,25 +1,21 @@
-import Hero from "./sections/Hero";
-import Navbar from "./components/Navbar";
+import Header from "./components/Header";
+import Hero from "./components/Hero";
 import About from "./components/About";
 import Skills from "./components/Skills";
-import Projects from "./components/projects";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Education from "./components/Education";
 import Experience from "./components/Experience";
+import Projects from "./components/WorkProjects";
 
 function App() {
   return (
-    <div>
-      <Hero />
-      <Navbar />
-      <About />
-      <Experience />
-      <Skills />
-      <Projects />
-      <Education />
-      <Contact />
-      <Footer />
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <main className="pt-16">
+        <Hero />
+        <About />
+        <Skills />
+        <Experience />
+        <Projects />
+      </main>
     </div>
   );
 }
