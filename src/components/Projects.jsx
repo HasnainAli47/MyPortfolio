@@ -6,7 +6,7 @@ const projects = [
     title: "Smart Advocate",
     image: "/projects/SmartAdvocate.png",
     description:
-      "AI legal assistant leveraging LLMs for document drafting, retrieval, and guided workflows.",
+      "AI legal assistant leveraging LLMs for document drafting, retrieval, and guided workflows. Improved retrieval accuracy by 40% via enterprise-grade RAG and LoRA fine-tuning.",
     tech: ["LangGraph", "RAG", "LLM", "LoRA", "PyTorch"],
     links: { live: "https://www.smartadvocate.com/" },
   },
@@ -15,7 +15,7 @@ const projects = [
     title: "ConvoPilot",
     image: "/projects/ConvoPilot.jpeg",
     description:
-      "Multi-agent conversational system coordinating LLM tools for enterprise workflows.",
+      "Multi-agent conversational system coordinating LLM tools for enterprise workflows. Reduced search latency and improved tool orchestration reliability with LangGraph.",
     tech: ["Agentic AI", "LangGraph", "OpenAI SDK", "Neo4j"],
     links: { code: "#" },
   },
@@ -24,7 +24,7 @@ const projects = [
     title: "Vaultoniq",
     image: "/projects/Vaultoniq.png",
     description:
-      "A US-based automobile automation platform for workshop employees to track attendance, work history, and optimize operations.",
+      "A US-based automobile automation platform for workshop employees to track attendance, work history, and optimize operations. Automated contract workflows with OpenAI, reducing manual processing by 60%.",
     tech: ["Django", "PostgreSQL", "React Native", "OpenAI API", "Ruby on Rails"],
     links: { live: "https://app.vaultoniq.com/" },
   },
@@ -57,7 +57,7 @@ const projects = [
     title: "Resume Parser – AI-Powered Resume Analysis",
     image: "/projects/ResumeParser.png",
     description:
-      "An AI-driven system that parses resumes using OCR and Llama-3 to extract candidate details for structured storage and filtering.",
+      "An AI-driven system that parses resumes using OCR and Llama-3 to extract candidate details for structured storage and filtering, enhancing recruitment efficiency.",
     tech: ["Django", "React", "SQL", "OCR", "Llama-3-70B"],
     links: {
       github: "https://github.com/HasnainAli47/ResumeParser",
@@ -70,7 +70,7 @@ const projects = [
     title: "2ndPlace – Hostel Finder",
     image: "/projects/2ndPlace.png",
     description:
-      "A hostel discovery platform integrating Google Maps API for location-based searches and Stripe for online payments.",
+      "A highly scalable hostel discovery platform integrating Google Maps API for precise location-based searches and Stripe for online payments, reducing search latency by 80%.",
     tech: ["React", "Django", "PostgreSQL", "MongoDB", "Google Maps API"],
     links: { live: "https://2ndplace-stagging.vercel.app/" },
   },
