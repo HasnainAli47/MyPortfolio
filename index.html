@@ -40,8 +40,14 @@
           chatbot_id: 44,
           timestamp: new Date().toISOString()
         };
-        
-        // Create iframe with website context
+
+        // Only inject the local dev iframe when running on localhost
+        var isLocalhost = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
+        if (!isLocalhost) {
+          return; // avoid overlaying production with a failing localhost iframe
+        }
+
+        // Create iframe with website context (dev only)
         var iframe = document.createElement('iframe');
         var contextParam = encodeURIComponent(JSON.stringify(websiteContext));
         iframe.src = "http://localhost:3000/public/chat/44?website_context=" + contextParam;
@@ -55,12 +61,12 @@
         iframe.style.pointerEvents = 'auto';
         iframe.style.background = 'transparent';
         iframe.allow = 'clipboard-write;';
-        
+
         // Store context for session persistence
         if (typeof(Storage) !== "undefined") {
           sessionStorage.setItem('convopilot_website_context', JSON.stringify(websiteContext));
         }
-        
+
         (document.getElementById('convopilot-widget-container')||document.body).appendChild(iframe);
       });
     })();
