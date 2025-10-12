@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { useEditor, EditorContent } from '@tiptap/react';
+import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import { RichTextEditor } from '@mantine/tiptap';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([]);
@@ -97,9 +97,9 @@ export default function BlogPage() {
       </div>
 
       {showNew && (
-        <div className="fixed inset-0 z-50">
-          <div className="absolute inset-0 bg-black/70" onClick={() => setShowNew(false)} />
-          <div className="absolute left-1/2 top-24 -translate-x-1/2 w-[92%] max-w-3xl rounded-xl p-[1px] bg-gradient-to-br from-[#00A7A7]/40 to-transparent shadow-[0_0_18px_rgba(0,167,167,0.35)]">
+        <div className="fixed inset-0 z-50 overflow-y-auto">
+          <div className="fixed inset-0 bg-black/70" onClick={() => setShowNew(false)} />
+          <div className="relative mx-auto my-24 w-[92%] max-w-3xl rounded-xl p-[1px] bg-gradient-to-br from-[#00A7A7]/40 to-transparent shadow-[0_0_18px_rgba(0,167,167,0.35)]">
             <div className="rounded-[11px] border border-white/10 bg-[#0b0b0b] p-6">
               {!auth.authed ? (
                 <form onSubmit={async (e) => {
@@ -155,17 +155,29 @@ export default function BlogPage() {
                   </div>
                   <div>
                     <label className="block text-sm mb-1">Content (Rich Text)</label>
-                    <div className="rounded-md border border-white/10 bg-black/20 p-2">
-                      <div className="flex flex-wrap gap-2 mb-2 text-sm">
-                        <button type="button" className="border border-white/10 px-2 py-1 rounded" onClick={() => editor?.chain().focus().toggleBold().run()}>Bold</button>
-                        <button type="button" className="border border-white/10 px-2 py-1 rounded" onClick={() => editor?.chain().focus().toggleItalic().run()}>Italic</button>
-                        <button type="button" className="border border-white/10 px-2 py-1 rounded" onClick={() => editor?.chain().focus().toggleBulletList().run()}>Bulleted List</button>
-                        <button type="button" className="border border-white/10 px-2 py-1 rounded" onClick={() => editor?.chain().focus().toggleOrderedList().run()}>Ordered List</button>
-                        <button type="button" className="border border-white/10 px-2 py-1 rounded" onClick={() => editor?.chain().focus().setParagraph().run()}>Paragraph</button>
-                        <button type="button" className="border border-white/10 px-2 py-1 rounded" onClick={() => editor?.chain().focus().toggleHeading({ level: 2 }).run()}>H2</button>
-                      </div>
-                      <EditorContent editor={editor} className="prose prose-invert max-w-none min-h-[200px]" />
-                    </div>
+                    <RichTextEditor editor={editor} className="rounded-md border border-white/10 bg-black/20">
+                      <RichTextEditor.Toolbar sticky stickyOffset={0}>
+                        <RichTextEditor.ControlsGroup>
+                          <RichTextEditor.Bold />
+                          <RichTextEditor.Italic />
+                          <RichTextEditor.Strikethrough />
+                          <RichTextEditor.Underline />
+                        </RichTextEditor.ControlsGroup>
+                        <RichTextEditor.ControlsGroup>
+                          <RichTextEditor.H1 />
+                          <RichTextEditor.H2 />
+                          <RichTextEditor.H3 />
+                        </RichTextEditor.ControlsGroup>
+                        <RichTextEditor.ControlsGroup>
+                          <RichTextEditor.BulletList />
+                          <RichTextEditor.OrderedList />
+                          <RichTextEditor.Blockquote />
+                          <RichTextEditor.Code />
+                          <RichTextEditor.ClearFormatting />
+                        </RichTextEditor.ControlsGroup>
+                      </RichTextEditor.Toolbar>
+                      <RichTextEditor.Content className="min-h-[200px] max-h-[50vh] overflow-y-auto" />
+                    </RichTextEditor>
                   </div>
                   {error && <p className="text-red-400 text-sm">{error}</p>}
                   <div className="flex items-center gap-3">
