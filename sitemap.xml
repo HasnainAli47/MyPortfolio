@@ -8,5 +8,9 @@
     <loc>https://hasnainali-aiengineer.vercel.app/blog</loc>
     <priority>0.8</priority>
   </url>
-  <!-- Add a <url> tag for each blog post you write -->
+  <!-- A new blog for RAG Vs KAG -->
+  <url>
+    <loc>https://hasnainali-aiengineer.vercel.app/blog/from-scattered-data-to-connected-insights-why-i-chose-knowledge-graphs-over-rag-for-a-medical-chatbot</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>
