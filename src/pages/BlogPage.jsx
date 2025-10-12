@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { RichTextEditor } from '@mantine/tiptap';
+import Underline from '@tiptap/extension-underline';
 
 export default function BlogPage() {
   const [posts, setPosts] = useState([]);
@@ -79,7 +80,7 @@ export default function BlogPage() {
     }
   };
 
-  const editor = useEditor({ extensions: [StarterKit], content: form.content, onUpdate: ({ editor }) => setForm((f) => ({ ...f, content: editor.getHTML() })) });
+  const editor = useEditor({ extensions: [StarterKit, Underline], content: form.content, onUpdate: ({ editor }) => setForm((f) => ({ ...f, content: editor.getHTML() })) });
 
   return (
     <section className="bg-[#111111] text-[#EAEAEA] min-h-screen pt-24 px-6">

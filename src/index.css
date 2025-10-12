@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 body {  
   background-color: #111111;
@@ -34,6 +35,10 @@ html {
 .hover\:text-accent:hover { color: var(--accent); }
 .hover\:bg-accent\/10:hover { background-color: color-mix(in srgb, var(--accent) 10%, transparent); }
 .hover\:bg-accent\/90:hover { background-color: color-mix(in srgb, var(--accent) 90%, black); }
+
+/* Typography tweaks for dark theme */
+.prose :where(a):not(:where(.not-prose *)) { color: var(--accent); }
+.prose-invert :where(code):not(:where(.not-prose *)) { background: #0b0b0b; padding: 0.15rem 0.35rem; border-radius: 0.25rem; }
 
 @keyframes moveGrid {
   from { background-position: 0 0; }
