@@ -7,8 +7,8 @@ import { put, list } from '@vercel/blob';
 export default async function handler(req, res) {
   const jsonPath = path.resolve('./public/posts.json');
   const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
-  const ADMIN_USER = process.env.VITE_ADMIN_USER || process.env.ADMIN_USER || process.env.NEXT_PUBLIC_ADMIN_USER || '';
-  const ADMIN_PASS = process.env.VITE_ADMIN_PASS || process.env.ADMIN_PASS || process.env.NEXT_PUBLIC_ADMIN_PASS || '';
+  const ADMIN_USER = (process.env.VITE_ADMIN_USER || process.env.ADMIN_USER || process.env.NEXT_PUBLIC_ADMIN_USER || '').trim();
+  const ADMIN_PASS = (process.env.VITE_ADMIN_PASS || process.env.ADMIN_PASS || process.env.NEXT_PUBLIC_ADMIN_PASS || '').trim();
 
   async function loadPostsFromBlob() {
     if (!blobToken) return null;
