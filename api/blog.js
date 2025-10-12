@@ -7,6 +7,8 @@ import { put, list } from '@vercel/blob';
 export default async function handler(req, res) {
   const jsonPath = path.resolve('./public/posts.json');
   const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+  const ADMIN_USER = process.env.VITE_ADMIN_USER || process.env.ADMIN_USER || process.env.NEXT_PUBLIC_ADMIN_USER || '';
+  const ADMIN_PASS = process.env.VITE_ADMIN_PASS || process.env.ADMIN_PASS || process.env.NEXT_PUBLIC_ADMIN_PASS || '';
 
   async function loadPostsFromBlob() {
     if (!blobToken) return null;
@@ -54,12 +56,13 @@ export default async function handler(req, res) {
 
   if (req.method === 'POST') {
     const { username, password, title, content, excerpt, imageUrl, imageBase64, imageName, authCheck } = req.body || {};
-    console.log("The inncoming username and password ", username, password, " while the actual username and password are ", process.env.VITE_ADMIN_USER, process.env.VITE_ADMIN_PASS);
     
-    if (
-      username !== process.env.VITE_ADMIN_USER ||
-      password !== process.env.VITE_ADMIN_PASS
-    ) {
+    const inputUser = String(username || '').trim();
+    const inputPass = String(password || '');
+    if (!ADMIN_USER || !ADMIN_PASS) {
+      return res.status(500).json({ message: 'Server credentials not configured. Set VITE_ADMIN_USER/VITE_ADMIN_PASS (or ADMIN_USER/ADMIN_PASS) in environment.' });
+    }
+    if (inputUser !== ADMIN_USER || inputPass !== ADMIN_PASS) {
       return res.status(401).json({ message: 'Unauthorized' });
     }
 
