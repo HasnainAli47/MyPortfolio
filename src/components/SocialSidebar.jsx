@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
-import { FaLinkedin, FaGithub, FaEnvelope, FaDownload } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope, FaDownload, FaBookOpen } from 'react-icons/fa';
 
 const links = [
+  { href: '/blog', label: 'Read Blog', Icon: FaBookOpen, highlight: true },
   { href: 'https://linkedin.com/in/hasnainali3', label: 'LinkedIn', Icon: FaLinkedin },
   { href: 'https://github.com/HasnainAli47', label: 'GitHub', Icon: FaGithub },
   { href: 'mailto:codingwithhasnain@gmail.com', label: 'Email', Icon: FaEnvelope },
@@ -17,12 +18,12 @@ export default function SocialSidebar() {
       className="fixed top-1/2 -translate-y-1/2 right-0 z-40"
     >
       <div className="bg-[#0b0b0b] border border-white/10 rounded-l-xl p-2 flex flex-col gap-3">
-        {links.map(({ href, label, Icon }) => (
+        {links.map(({ href, label, Icon, highlight }) => (
           <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel={href.startsWith('http') ? 'noopener noreferrer' : undefined} className="group relative flex items-center">
             <span className="absolute right-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/70 text-[#EAEAEA] text-xs rounded px-2 py-1 whitespace-nowrap">
               {label}
             </span>
-            <div className="h-9 w-9 rounded-lg bg-black/30 border border-white/10 flex items-center justify-center text-slate-300 group-hover:text-accent group-hover:shadow-[0_0_12px_rgba(0,167,167,0.4)] transition">
+            <div className={`h-9 w-9 rounded-lg border flex items-center justify-center transition ${highlight ? 'bg-accent/20 border-accent text-accent shadow-[0_0_12px_rgba(0,167,167,0.4)] animate-pulse' : 'bg-black/30 border-white/10 text-slate-300 group-hover:text-accent group-hover:shadow-[0_0_12px_rgba(0,167,167,0.4)]'}`}>
               <Icon className="h-4 w-4" />
             </div>
           </a>

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -43,7 +44,16 @@ export default function BlogPost() {
           <article>
             <h1 className="text-3xl sm:text-4xl font-extrabold bg-gradient-to-r from-white to-[#00A7A7] bg-clip-text text-transparent">{post.title}</h1>
             <p className="mt-2 text-sm text-slate-400">{new Date(post.createdAt).toLocaleString()}</p>
-            <p className="mt-6 whitespace-pre-wrap text-slate-200">{post.content}</p>
+            {post.image && (
+              <img src={post.image} alt="Header" className="mt-6 w-full rounded-lg border border-white/10" />
+            )}
+            <div className="prose prose-invert max-w-none mt-6">
+              {typeof post.content === 'string' && /<\/?[a-z][\s\S]*>/i.test(post.content) ? (
+                <div dangerouslySetInnerHTML={{ __html: post.content }} />
+              ) : (
+                <ReactMarkdown>{post.content || ''}</ReactMarkdown>
+              )}
+            </div>
           </article>
         )}
       </div>

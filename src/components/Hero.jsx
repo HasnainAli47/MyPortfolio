@@ -62,7 +62,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.05 }}
           className="mt-3 text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-white to-[#00A7A7] bg-clip-text text-transparent"
         >
-          AI/ML Engineer Building Intelligent Systems
+          Senior AI/ML & Full-Stack Engineer | Building Intelligent Systems for Global Impact
         </motion.h1>
 
         <motion.p
@@ -71,7 +71,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-4 text-base sm:text-lg md:text-xl text-slate-300"
         >
-          A results-driven AI/ML Engineer with over 4 years of experience specializing in building and deploying sophisticated AI agents, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems.
+          A highly accomplished and results-driven engineer with 5+ years of extensive experience in architecting, developing, and deploying sophisticated AI agents, Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. I specialize in crafting scalable, production-ready AI solutions for complex challenges, optimized for high-performance and reliability in remote and innovative markets globally, including the UAE.
         </motion.p>
 
         <motion.div

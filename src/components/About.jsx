@@ -31,10 +31,13 @@ export default function About() {
               About Me
             </h2>
             <p className="mt-5 text-base sm:text-lg leading-relaxed text-slate-300">
-              A results-driven AI/ML Engineer with over 4 years of experience specializing in building and deploying sophisticated AI agents, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. Expertise in fine-tuning LLMs (LoRA, QLoRA) in multi-GPU environments for high-profile clients. Proven ability to architect complex, agentic workflows with LangGraph and deliver scalable, production-ready AI solutions that solve critical business problems.
+              A highly accomplished and results-driven Senior AI/ML & Full-Stack Engineer with 5+ years of comprehensive experience in designing, developing, and deploying cutting-edge Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. I bring a proven track record of architecting scalable, production-ready AI solutions and intricate AI agents that drive significant business value.
             </p>
             <p className="mt-4 text-base sm:text-lg text-slate-300">
-              I am passionate about leveraging cutting-edge AI to build intelligent, scalable, and user-centric products that deliver real-world impact.
+              My expertise includes LLM fine-tuning (LoRA, QLoRA) in multi-GPU environments, engineering complex agentic workflows with LangGraph, and optimizing enterprise-grade RAG systems for superior performance. I seamlessly integrate advanced AI with robust full-stack development using Python (Django, Flask) and React, alongside managing scalable cloud infrastructure on AWS (SageMaker, Bedrock, S3).
+            </p>
+            <p className="mt-4 text-base sm:text-lg text-slate-300">
+              I am passionate about transforming complex challenges into intelligent, scalable, and user-centric products that deliver real-world impact, ideally for dynamic remote teams and forward-thinking organizations, including those in the UAE.
             </p>
           </motion.div>
         </div>
