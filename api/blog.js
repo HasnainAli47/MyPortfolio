@@ -2,12 +2,47 @@ import fs from 'fs/promises';
 import path from 'path';
 import { v4 as uuidv4 } from 'uuid';
 import fsSync from 'fs';
+import { put, list } from '@vercel/blob';
 
 export default async function handler(req, res) {
   const jsonPath = path.resolve('./public/posts.json');
+  const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
+
+  async function loadPostsFromBlob() {
+    if (!blobToken) return null;
+    try {
+      const { blobs } = await list({ token: blobToken, prefix: 'posts.json' });
+      const match = blobs.find((b) => b.pathname === 'posts.json');
+      if (!match) return null;
+      const r = await fetch(match.url);
+      if (!r.ok) return null;
+      return await r.json();
+    } catch {
+      return null;
+    }
+  }
+
+  async function savePostsToBlob(posts) {
+    if (!blobToken) return false;
+    try {
+      await put('posts.json', JSON.stringify(posts, null, 2), {
+        access: 'public',
+        token: blobToken,
+        contentType: 'application/json',
+      });
+      return true;
+    } catch {
+      return false;
+    }
+  }
 
   if (req.method === 'GET') {
     try {
+      const blobPosts = await loadPostsFromBlob();
+      if (blobPosts) {
+        res.status(200).json(blobPosts);
+        return;
+      }
       const fileContents = await fs.readFile(jsonPath, 'utf8');
       const posts = JSON.parse(fileContents);
       res.status(200).json(posts);
@@ -35,23 +70,42 @@ export default async function handler(req, res) {
 
     let posts = [];
     try {
-      const fileContents = await fs.readFile(jsonPath, 'utf8');
-      posts = JSON.parse(fileContents);
+      const blobPosts = await loadPostsFromBlob();
+      if (blobPosts) {
+        posts = blobPosts;
+      } else {
+        const fileContents = await fs.readFile(jsonPath, 'utf8');
+        posts = JSON.parse(fileContents);
+      }
     } catch (error) {
-      // File missing — start fresh
+      // start fresh
     }
 
     // Optional image handling: if base64 provided, write to public/blog
     let headerImage = imageUrl || '';
     try {
       if (!headerImage && imageBase64 && imageName) {
-        const dir = path.resolve('./public/blog');
-        if (!fsSync.existsSync(dir)) fsSync.mkdirSync(dir, { recursive: true });
         const clean = imageName.replace(/[^a-zA-Z0-9._-]/g, '_');
-        const target = path.join(dir, clean);
-        const data = imageBase64.split(',').pop();
-        fsSync.writeFileSync(target, Buffer.from(data, 'base64'));
-        headerImage = `/blog/${clean}`;
+        const base64Data = imageBase64.split(',').pop();
+        const buffer = Buffer.from(base64Data, 'base64');
+        const ext = (clean.split('.').pop() || '').toLowerCase();
+        const contentType = ext === 'png' ? 'image/png' : ext === 'jpg' || ext === 'jpeg' ? 'image/jpeg' : 'application/octet-stream';
+
+        if (blobToken) {
+          const { url } = await put(`blog/${Date.now()}-${clean}`, buffer, {
+            access: 'public',
+            contentType,
+            token: blobToken,
+          });
+          headerImage = url;
+        } else {
+          // dev fallback: write to local public folder
+          const dir = path.resolve('./public/blog');
+          if (!fsSync.existsSync(dir)) fsSync.mkdirSync(dir, { recursive: true });
+          const target = path.join(dir, clean);
+          fsSync.writeFileSync(target, buffer);
+          headerImage = `/blog/${clean}`;
+        }
       }
     } catch {}
 
@@ -69,7 +123,20 @@ export default async function handler(req, res) {
     };
 
     posts.unshift(newPost);
-    await fs.writeFile(jsonPath, JSON.stringify(posts, null, 2));
+
+    // Save posts persistently
+    let saved = false;
+    if (blobToken) {
+      saved = await savePostsToBlob(posts);
+    }
+    if (!saved) {
+      try {
+        await fs.writeFile(jsonPath, JSON.stringify(posts, null, 2));
+        saved = true;
+      } catch (e) {
+        return res.status(500).json({ message: 'Storage not configured. On Vercel, set BLOB_READ_WRITE_TOKEN or use another persistent store.' });
+      }
+    }
 
     res.status(201).json({ message: 'Blog post created!', post: newPost });
     return;

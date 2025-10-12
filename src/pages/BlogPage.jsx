@@ -58,13 +58,17 @@ export default function BlogPage() {
           imageName: form.imageName,
         }),
       });
-      if (!res.ok) throw new Error('failed');
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(text || 'failed');
+      }
       const { post } = await res.json();
       setPosts((prev) => [post, ...prev]);
       setShowNew(false);
       setForm({ title: '', excerpt: '', content: '', image: '' });
     } catch (err) {
-      setError('Failed to publish. Check credentials.');
+      const message = err?.message || 'Failed to publish';
+      setError(message);
     } finally {
       setSubmitting(false);
     }
