@@ -9,6 +9,7 @@ export default async function handler(req, res) {
   const blobToken = process.env.BLOB_READ_WRITE_TOKEN;
   const ADMIN_USER = (process.env.VITE_ADMIN_USER || process.env.ADMIN_USER || process.env.NEXT_PUBLIC_ADMIN_USER || '').trim();
   const ADMIN_PASS = (process.env.VITE_ADMIN_PASS || process.env.ADMIN_PASS || process.env.NEXT_PUBLIC_ADMIN_PASS || '').trim();
+  const DISABLE_AUTH = String(process.env.DISABLE_BLOG_AUTH ?? 'true').toLowerCase() === 'true';
 
   async function loadPostsFromBlob() {
     if (!blobToken) return null;
@@ -59,11 +60,16 @@ export default async function handler(req, res) {
     
     const inputUser = String(username || '').trim();
     const inputPass = String(password || '');
-    if (!ADMIN_USER || !ADMIN_PASS) {
-      return res.status(500).json({ message: 'Server credentials not configured. Set VITE_ADMIN_USER/VITE_ADMIN_PASS (or ADMIN_USER/ADMIN_PASS) in environment.' });
+    if (authCheck === true && DISABLE_AUTH) {
+      return res.status(200).json({ ok: true, authDisabled: true });
     }
-    if (inputUser !== ADMIN_USER || inputPass !== ADMIN_PASS) {
-      return res.status(401).json({ message: 'Unauthorized' });
+    if (!DISABLE_AUTH) {
+      if (!ADMIN_USER || !ADMIN_PASS) {
+        return res.status(500).json({ message: 'Server credentials not configured. Set VITE_ADMIN_USER/VITE_ADMIN_PASS (or ADMIN_USER/ADMIN_PASS) in environment.' });
+      }
+      if (inputUser !== ADMIN_USER || inputPass !== ADMIN_PASS) {
+        return res.status(401).json({ message: 'Unauthorized' });
+      }
     }
 
     // If this is only an auth check, return early (no file writes)
