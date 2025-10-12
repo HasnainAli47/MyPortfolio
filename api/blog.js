@@ -14,10 +14,10 @@ export default async function handler(req, res) {
   async function loadPostsFromBlob() {
     if (!blobToken) return null;
     try {
-      const { blobs } = await list({ token: blobToken, prefix: 'posts.json' });
+      const { blobs } = await list({ token: blobToken, prefix: '' });
       const match = blobs.find((b) => b.pathname === 'posts.json');
       if (!match) return null;
-      const r = await fetch(match.url);
+      const r = await fetch(match.url, { cache: 'no-store' });
       if (!r.ok) return null;
       return await r.json();
     } catch {
@@ -133,18 +133,16 @@ export default async function handler(req, res) {
 
     posts.unshift(newPost);
 
-    // Save posts persistently
+    // Save posts persistently (write to Blob first, then update local file best-effort)
     let saved = false;
     if (blobToken) {
       saved = await savePostsToBlob(posts);
     }
-    if (!saved) {
-      try {
-        await fs.writeFile(jsonPath, JSON.stringify(posts, null, 2));
-        saved = true;
-      } catch (e) {
-        return res.status(500).json({ message: 'Storage not configured. On Vercel, set BLOB_READ_WRITE_TOKEN or use another persistent store.' });
-      }
+    try {
+      await fs.writeFile(jsonPath, JSON.stringify(posts, null, 2));
+    } catch {}
+    if (!saved && blobToken) {
+      return res.status(500).json({ message: 'Failed to save posts to Blob storage. Check BLOB_READ_WRITE_TOKEN permissions.' });
     }
 
     res.status(201).json({ message: 'Blog post created!', post: newPost });

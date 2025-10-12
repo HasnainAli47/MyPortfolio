@@ -64,6 +64,11 @@ export default function BlogPage() {
       }
       const { post } = await res.json();
       setPosts((prev) => [post, ...prev]);
+      // persist in localStorage as immediate fallback so navigation works before cache updates
+      try {
+        const local = JSON.parse(localStorage.getItem('dev_posts') || '[]');
+        localStorage.setItem('dev_posts', JSON.stringify([post, ...local]));
+      } catch {}
       setShowNew(false);
       setForm({ title: '', excerpt: '', content: '', image: '' });
     } catch (err) {
