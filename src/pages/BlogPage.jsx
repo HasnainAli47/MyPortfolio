@@ -17,21 +17,18 @@ export default function BlogPage() {
   useEffect(() => {
     const run = async () => {
       try {
-        let res = await fetch('/api/blog');
+        let res = await fetch('/api/blog', { cache: 'no-store' });
         if (!res.ok) throw new Error('api failed');
         let data = await res.json();
         if (!Array.isArray(data)) throw new Error('bad api');
-        const local = JSON.parse(localStorage.getItem('dev_posts') || '[]');
-        setPosts([...local, ...data]);
+        setPosts(data);
       } catch {
         try {
           const res2 = await fetch('/posts.json');
           const data2 = await res2.json();
-          const local = JSON.parse(localStorage.getItem('dev_posts') || '[]');
-          setPosts([...local, ...(Array.isArray(data2) ? data2 : [])]);
+          setPosts(Array.isArray(data2) ? data2 : []);
         } catch {
-          const local = JSON.parse(localStorage.getItem('dev_posts') || '[]');
-          setPosts(local);
+          setPosts([]);
         }
       } finally {
         setLoading(false);
@@ -65,11 +62,6 @@ export default function BlogPage() {
       }
       const { post } = await res.json();
       setPosts((prev) => [post, ...prev]);
-      // persist in localStorage as immediate fallback so navigation works before cache updates
-      try {
-        const local = JSON.parse(localStorage.getItem('dev_posts') || '[]');
-        localStorage.setItem('dev_posts', JSON.stringify([post, ...local]));
-      } catch {}
       setShowNew(false);
       setForm({ title: '', excerpt: '', content: '', image: '' });
     } catch (err) {

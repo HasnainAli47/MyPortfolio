@@ -10,7 +10,7 @@ export default function BlogPost() {
   useEffect(() => {
     const run = async () => {
       try {
-        let res = await fetch('/api/blog');
+        let res = await fetch('/api/blog', { cache: 'no-store' });
         if (!res.ok) throw new Error('api failed');
         let data = await res.json();
         if (!Array.isArray(data)) throw new Error('bad api');

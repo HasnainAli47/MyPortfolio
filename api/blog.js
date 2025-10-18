@@ -41,6 +41,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'GET') {
     try {
+      res.setHeader('Cache-Control', 'no-store');
       const blobPosts = await loadPostsFromBlob();
       if (blobPosts) {
         res.status(200).json(blobPosts);
