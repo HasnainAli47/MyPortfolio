@@ -13,4 +13,8 @@
     <loc>https://hasnainali-aiengineer.vercel.app/blog/from-scattered-data-to-connected-insights-why-i-chose-knowledge-graphs-over-rag-for-a-medical-chatbot</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://hasnainali-aiengineer.vercel.app/blog/explainable-ai-the-new-trust-layer-in-a-world-powered-by-machines</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>

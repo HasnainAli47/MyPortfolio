@@ -14,10 +14,20 @@ export default async function handler(req, res) {
   async function loadPostsFromBlob() {
     if (!blobToken) return null;
     try {
+      // Prefer stable posts.json if present; otherwise pick newest posts-*.json
       const { blobs } = await list({ token: blobToken, prefix: '' });
-      const match = blobs.find((b) => b.pathname === 'posts.json');
-      if (!match) return null;
-      const r = await fetch(match.url, { cache: 'no-store' });
+      let candidate = blobs.find((b) => b.pathname === 'posts.json');
+      if (!candidate) {
+        const candidates = blobs.filter((b) => /(^|\/)posts(-|\.)/i.test(b.pathname) && b.pathname.endsWith('.json'));
+        candidates.sort((a, b) => {
+          const ta = new Date(a.uploadedAt || a.lastModified || 0).getTime();
+          const tb = new Date(b.uploadedAt || b.lastModified || 0).getTime();
+          return tb - ta;
+        });
+        candidate = candidates[0];
+      }
+      if (!candidate) return null;
+      const r = await fetch(candidate.url + `?ts=${Date.now()}`, { cache: 'no-store' });
       if (!r.ok) return null;
       return await r.json();
     } catch {
@@ -28,10 +38,12 @@ export default async function handler(req, res) {
   async function savePostsToBlob(posts) {
     if (!blobToken) return false;
     try {
-      await put('posts.json', JSON.stringify(posts, null, 2), {
+      const body = JSON.stringify(posts, null, 2);
+      await put('posts.json', body, {
         access: 'public',
         token: blobToken,
         contentType: 'application/json',
+        addRandomSuffix: false,
       });
       return true;
     } catch {
