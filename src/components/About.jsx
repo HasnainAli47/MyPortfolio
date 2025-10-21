@@ -31,13 +31,13 @@ export default function About() {
               About Me
             </h2>
             <p className="mt-5 text-base sm:text-lg leading-relaxed text-slate-300">
-              A highly accomplished and results-driven Senior AI/ML & Full-Stack Engineer with 5+ years of comprehensive experience in designing, developing, and deploying cutting-edge Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. I bring a proven track record of architecting scalable, production-ready AI solutions and intricate AI agents that drive significant business value.
+              Results-driven AI Engineer with 5+ years delivering LLMs, agentic AI systems, and multimodal solutions end to end — from research and fine‑tuning (LoRA/QLoRA) to scalable production deployment.
             </p>
             <p className="mt-4 text-base sm:text-lg text-slate-300">
-              My expertise includes LLM fine-tuning (LoRA, QLoRA) in multi-GPU environments, engineering complex agentic workflows with LangGraph, and optimizing enterprise-grade RAG systems for superior performance. I seamlessly integrate advanced AI with robust full-stack development using Python (Django, Flask) and React, alongside managing scalable cloud infrastructure on AWS (SageMaker, Bedrock, S3).
+              I design RAG architectures, multi‑agent pipelines, and document intelligence systems using LangGraph, LangChain, PyTorch, and Hugging Face — deployed on AWS (Bedrock, SageMaker) with strong MLOps practices.
             </p>
             <p className="mt-4 text-base sm:text-lg text-slate-300">
-              I am passionate about transforming complex challenges into intelligent, scalable, and user-centric products that deliver real-world impact, ideally for dynamic remote teams and forward-thinking organizations, including those in the UAE.
+              I love translating complex models into real applications that create measurable impact.
             </p>
           </motion.div>
         </div>

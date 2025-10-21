@@ -3,9 +3,9 @@ import { FaLinkedin, FaGithub, FaEnvelope, FaDownload, FaBookOpen } from 'react-
 
 const links = [
   { href: '/blog', label: 'Read Blog', Icon: FaBookOpen, highlight: true },
-  { href: 'https://linkedin.com/in/hasnainali3', label: 'LinkedIn', Icon: FaLinkedin },
+  { href: 'https://linkedin.com/in/hasnainali4', label: 'LinkedIn', Icon: FaLinkedin },
   { href: 'https://github.com/HasnainAli47', label: 'GitHub', Icon: FaGithub },
-  { href: 'mailto:codingwithhasnain@gmail.com', label: 'Email', Icon: FaEnvelope },
+  { href: 'mailto:ali.hasnainn2@gmail.com', label: 'Email', Icon: FaEnvelope },
   { href: '/Hasnain Ali AI_ML Engineer Resume.docx.pdf', label: 'Download CV', Icon: FaDownload },
 ];
 

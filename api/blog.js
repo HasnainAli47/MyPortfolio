@@ -14,22 +14,32 @@ export default async function handler(req, res) {
   async function loadPostsFromBlob() {
     if (!blobToken) return null;
     try {
-      // Prefer stable posts.json if present; otherwise pick newest posts-*.json
+      // Prefer stable posts.json if present; otherwise merge all posts-*.json
       const { blobs } = await list({ token: blobToken, prefix: '' });
-      let candidate = blobs.find((b) => b.pathname === 'posts.json');
-      if (!candidate) {
-        const candidates = blobs.filter((b) => /(^|\/)posts(-|\.)/i.test(b.pathname) && b.pathname.endsWith('.json'));
-        candidates.sort((a, b) => {
-          const ta = new Date(a.uploadedAt || a.lastModified || 0).getTime();
-          const tb = new Date(b.uploadedAt || b.lastModified || 0).getTime();
-          return tb - ta;
-        });
-        candidate = candidates[0];
+      const stable = blobs.find((b) => b.pathname === 'posts.json');
+      if (stable) {
+        const r = await fetch(stable.url + `?ts=${Date.now()}`, { cache: 'no-store' });
+        if (!r.ok) return null;
+        return await r.json();
       }
-      if (!candidate) return null;
-      const r = await fetch(candidate.url + `?ts=${Date.now()}`, { cache: 'no-store' });
-      if (!r.ok) return null;
-      return await r.json();
+      const candidates = blobs.filter((b) => /(^|\/)posts-[A-Za-z0-9]/.test(b.pathname) && b.pathname.endsWith('.json'));
+      if (candidates.length === 0) return null;
+      const results = await Promise.allSettled(candidates.map((c) => fetch(c.url + `?ts=${Date.now()}`, { cache: 'no-store' }).then((r) => r.ok ? r.json() : [])));
+      const mergedById = new Map();
+      for (const res of results) {
+        const arr = Array.isArray(res.value) ? res.value : [];
+        for (const p of arr) {
+          const key = p?.id || p?.slug;
+          if (!key) continue;
+          // Prefer newer createdAt
+          const prev = mergedById.get(key);
+          if (!prev || new Date(p.createdAt || 0) > new Date(prev.createdAt || 0)) {
+            mergedById.set(key, p);
+          }
+        }
+      }
+      const merged = Array.from(mergedById.values()).sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+      return merged;
     } catch {
       return null;
     }

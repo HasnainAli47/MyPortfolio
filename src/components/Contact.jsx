@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { FaEnvelope, FaGithub, FaLinkedin } from 'react-icons/fa';
+import { sendContactForm, isEmailJsConfigured } from '../lib/emailService';
 
 export default function Contact() {
+  const formRef = useRef(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -13,12 +15,16 @@ export default function Contact() {
     setStatus('sending');
     setError(null);
     try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, message }),
-      });
-      if (!res.ok) throw new Error('Failed to send');
+      if (isEmailJsConfigured()) {
+        await sendContactForm(formRef.current);
+      } else {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, message }),
+        });
+        if (!res.ok) throw new Error('Failed to send');
+      }
       setStatus('success');
       setName('');
       setEmail('');
@@ -38,11 +44,11 @@ export default function Contact() {
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-10">
           <div>
             <div className="space-y-4">
-              <a href="mailto:codingwithhasnain@gmail.com" className="flex items-center gap-3 text-slate-300 hover:text-accent">
-                <FaEnvelope className="h-5 w-5" /> codingwithhasnain@gmail.com
+              <a href="mailto:ali.hasnainn2@gmail.com" className="flex items-center gap-3 text-slate-300 hover:text-accent">
+                <FaEnvelope className="h-5 w-5" /> ali.hasnainn2@gmail.com
               </a>
-              <a href="https://linkedin.com/in/hasnainali3" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-300 hover:text-accent">
-                <FaLinkedin className="h-5 w-5" /> linkedin.com/in/hasnainali3
+              <a href="https://linkedin.com/in/hasnainali4" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-300 hover:text-accent">
+                <FaLinkedin className="h-5 w-5" /> linkedin.com/in/hasnainali4
               </a>
               <a href="https://github.com/HasnainAli47" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-slate-300 hover:text-accent">
                 <FaGithub className="h-5 w-5" /> github.com/HasnainAli47
@@ -51,19 +57,23 @@ export default function Contact() {
           </div>
 
           <div>
-            <form onSubmit={onSubmit} className="rounded-xl p-[1px] bg-gradient-to-br from-[#00A7A7]/30 to-transparent">
+            <form ref={formRef} onSubmit={onSubmit} className="rounded-xl p-[1px] bg-gradient-to-br from-[#00A7A7]/30 to-transparent">
               <div className="rounded-[11px] border border-white/10 bg-black/30 p-5 space-y-4">
+                {/* Hidden fields to satisfy EmailJS template variables */}
+                <input type="hidden" name="name" value={name} />
+                <input type="hidden" name="email" value={email} />
+                <input type="hidden" name="title" value="Portfolio Contact" />
                 <div>
                   <label className="block text-sm mb-1">Your Name</label>
-                  <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Jane Doe" className="w-full rounded-md bg-[#0b0b0b] border border-white/10 p-3" required />
+                  <input name="user_name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Jane Doe" className="w-full rounded-md bg-[#0b0b0b] border border-white/10 p-3" required />
                 </div>
                 <div>
                   <label className="block text-sm mb-1">Your Email</label>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="jane@example.com" className="w-full rounded-md bg-[#0b0b0b] border border-white/10 p-3" required />
+                  <input name="user_email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="jane@example.com" className="w-full rounded-md bg-[#0b0b0b] border border-white/10 p-3" required />
                 </div>
                 <div>
                   <label className="block text-sm mb-1">Message</label>
-                  <textarea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="How can I help?" rows={6} className="w-full rounded-md bg-[#0b0b0b] border border-white/10 p-3" required />
+                  <textarea name="message" value={message} onChange={(e) => setMessage(e.target.value)} placeholder="How can I help?" rows={6} className="w-full rounded-md bg-[#0b0b0b] border border-white/10 p-3" required />
                 </div>
                 {status === 'sending' && <p className="text-slate-300 text-sm">Sending...</p>}
                 {status === 'success' && <p className="text-green-400 text-sm">Message Sent!</p>}

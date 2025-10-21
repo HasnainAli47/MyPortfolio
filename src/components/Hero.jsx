@@ -62,7 +62,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.05 }}
           className="mt-3 text-4xl sm:text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-white to-[#00A7A7] bg-clip-text text-transparent"
         >
-          Senior AI/ML & Full-Stack Engineer | Building Intelligent Systems for Global Impact
+          Senior AI Engineer & Data Scientist
         </motion.h1>
 
         <motion.p
@@ -71,7 +71,7 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="mt-4 text-base sm:text-lg md:text-xl text-slate-300"
         >
-          A highly accomplished and results-driven engineer with 5+ years of extensive experience in architecting, developing, and deploying sophisticated AI agents, Generative AI, Large Language Models (LLMs), and Retrieval-Augmented Generation (RAG) systems. I specialize in crafting scalable, production-ready AI solutions for complex challenges, optimized for high-performance and reliability in remote and innovative markets globally, including the UAE.
+          Results-driven AI Engineer with 5+ years building and deploying intelligent systems across NLP, computer vision, and multimodal domains. Expert in LLMs, Agentic AI, RAG architectures, and end‑to‑end ML pipelines from fine‑tuning to production. I blend a strong research mindset with robust engineering to turn complex models into real products.
         </motion.p>
 
         <motion.div
@@ -81,7 +81,7 @@ export default function Hero() {
           className="mt-6 flex items-center justify-center gap-5"
         >
           <a
-            href="https://linkedin.com/in/hasnainali3"
+            href="https://linkedin.com/in/hasnainali4"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"

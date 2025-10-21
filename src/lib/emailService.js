@@ -1,10 +1,9 @@
 import emailjs from "@emailjs/browser";
 
-// Email service isolated for future integration
-// These identifiers were extracted from the previous Contact component
-const EMAILJS_SERVICE_ID = "service_8j3m4qc";
-const EMAILJS_TEMPLATE_ID = "template_lo1498b";
-const EMAILJS_PUBLIC_KEY = "DuClVwzLddDqFv0bt";
+// Prefer env configuration; fall back to existing placeholders for local dev
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_8j3m4qc";
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_lo1498b";
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "DuClVwzLddDqFv0bt";
 
 /**
  * Sends a contact form using EmailJS. Accepts a form element reference.
@@ -30,6 +29,10 @@ export function sendMessage({ user_name, user_email, message }) {
     { user_name, user_email, message },
     EMAILJS_PUBLIC_KEY
   );
+}
+
+export function isEmailJsConfigured() {
+  return Boolean(EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY);
 }
 
 
