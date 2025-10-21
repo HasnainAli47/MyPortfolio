@@ -64,10 +64,12 @@
           timestamp: new Date().toISOString()
         };
 
-        // Only inject the local dev iframe when running on localhost
+        // Only inject the local dev iframe when explicitly enabled via ?widget=1 on localhost
         var isLocalhost = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
-        if (!isLocalhost) {
-          return; // avoid overlaying production with a failing localhost iframe
+        var params = new URLSearchParams(window.location.search);
+        var enableWidget = params.get('widget') === '1';
+        if (!(isLocalhost && enableWidget)) {
+          return; // avoid overlaying app unless explicitly requested
         }
 
         // Create iframe with website context (dev only)

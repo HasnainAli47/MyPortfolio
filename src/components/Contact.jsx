@@ -16,7 +16,17 @@ export default function Contact() {
     setError(null);
     try {
       if (isEmailJsConfigured()) {
-        await sendContactForm(formRef.current);
+        // Try EmailJS first; if it fails (e.g., missing template), fall back to server
+        try {
+          await sendContactForm(formRef.current);
+        } catch (e) {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, message }),
+          });
+          if (!res.ok) throw e;
+        }
       } else {
         const res = await fetch('/api/contact', {
           method: 'POST',
@@ -31,7 +41,7 @@ export default function Contact() {
       setMessage('');
     } catch (err) {
       setStatus('error');
-      setError('Failed to send message. Please try again later.');
+      setError(err?.text || err?.message || 'Failed to send message. Please try again later.');
     }
   };
 

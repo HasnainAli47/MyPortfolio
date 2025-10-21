@@ -5,6 +5,13 @@ const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_8
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_lo1498b";
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "DuClVwzLddDqFv0bt";
 
+// Initialize SDK (harmless if also passing the key per request)
+try {
+  if (EMAILJS_PUBLIC_KEY) {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  }
+} catch {}
+
 /**
  * Sends a contact form using EmailJS. Accepts a form element reference.
  * Returns a Promise that resolves on success and rejects on failure.
