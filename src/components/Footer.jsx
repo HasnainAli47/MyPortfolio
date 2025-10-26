@@ -23,7 +23,7 @@ export default function Footer() {
         <div>
           <h4 className="text-white font-semibold">Socials</h4>
           <div className="mt-3 flex items-center gap-4">
-            <a href="https://linkedin.com/in/hasnainali3" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-accent">
+            <a href="https://linkedin.com/in/hasnainali4" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-accent">
               <FaLinkedin className="h-5 w-5" />
             </a>
             <a href="https://github.com/HasnainAli47" target="_blank" rel="noopener noreferrer" className="text-slate-300 hover:text-accent">

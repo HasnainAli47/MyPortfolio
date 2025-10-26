@@ -18,4 +18,9 @@
     <loc>https://hasnainali-aiengineer.vercel.app/blog/explainable-ai-the-new-trust-layer-in-a-world-powered-by-machines</loc>
     <priority>0.7</priority>
   </url>
+  <!-- Is Death Predictable? -->
+  <url>
+    <loc>https://hasnainali-aiengineer.vercel.app/blog/is-death-predictable</loc>
+    <priority>0.7</priority>
+  </url>
 </urlset>

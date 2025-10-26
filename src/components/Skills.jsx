@@ -54,7 +54,7 @@ const categories = [
   {
     title: "Backend & Data",
     skills: [
-      "Python (Django, Flask)",
+      "Python (FastAPI, Django, Flask)",
       "RESTful APIs",
     ],
   },

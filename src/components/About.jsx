@@ -34,7 +34,7 @@ export default function About() {
               Results-driven AI Engineer with 5+ years delivering LLMs, agentic AI systems, and multimodal solutions end to end — from research and fine‑tuning (LoRA/QLoRA) to scalable production deployment.
             </p>
             <p className="mt-4 text-base sm:text-lg text-slate-300">
-              I design RAG architectures, multi‑agent pipelines, and document intelligence systems using LangGraph, LangChain, PyTorch, and Hugging Face — deployed on AWS (Bedrock, SageMaker) with strong MLOps practices.
+              I design RAG architectures, multi‑agent pipelines, and document intelligence systems using LangGraph, LangChain, PyTorch, and Hugging Face — deployed on AWS (Bedrock, SageMaker) with strong MLOps practices. On the backend, I build production APIs with Python (FastAPI, Django, Flask) and robust data pipelines.
             </p>
             <p className="mt-4 text-base sm:text-lg text-slate-300">
               I love translating complex models into real applications that create measurable impact.
